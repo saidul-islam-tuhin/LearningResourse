@@ -1,0 +1,8 @@
+<h1>{{student.std_name}}</h1>
+
+<ul>
+    {% for point in point %}
+        <li>{{ point.marks }} - {{ point.sub_name }}</li>
+        <p>{{ forloop.counter }}</p>
+    {% endfor %}
+</ul>

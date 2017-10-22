@@ -1,0 +1,64 @@
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Social Auth</title>
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '150971682170529',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{latest-api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</head>
+<body>
+  <header>
+    <h1>Simple Social Auth</h1>
+    {% if user.is_authenticated %}
+      You are signed in as <strong>{{ user.username }}</strong> /
+      <a href="{% url 'home' %}">home</a> /
+        {% comment %}
+      <a href="{% url 'settings' %}">settings</a> /
+      <a href="{% url 'password' %}">change password</a> /
+       {%  endcomment%}
+      <a href="{% url 'logout' %}">logout</a>
+
+    {% else %}
+      <a href="{% url 'login' %}">login</a> /
+      <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+    <hr>
+  </header>
+  <main>
+    {% for message in messages %}
+      <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
+        {{ message }}
+      </p>
+    {% endfor %}
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer>
+    <hr>
+    <small>
+      <a href="https://simpleisbetterthancomplex.com">simpleisbetterthancomplex.com</a> /
+      <a href="https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html">read more about this example</a>
+    </small>
+  </footer>
+</body>
+</html>

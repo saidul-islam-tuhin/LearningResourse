@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="test_form" method="post">
+    {% csrf_token %}
+    <label for="test_input">
+        Insert :
+    </label>
+    <input type="text" id="test_input" name="q">
+    <button type="submit">Submit</button>
+</form>
+<h5 id="result">{{ value }}</h5>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'grade/js/main.js' %}"></script>
+</body>
+</html>

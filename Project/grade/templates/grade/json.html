@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+
+</head>
+<body>
+{{ foo }}
+{{ investments.two }}
+<p> {{ data.hello }}</p>
+<input type="text" id="json_test">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'grade/js/main.js' %}"></script>
+</body>
+</html>
