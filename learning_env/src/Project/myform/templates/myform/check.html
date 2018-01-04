@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{% url 'myform:CreateForm' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+
+    <p>ssfs dfsf </p>
+    {{form1.as_ul}}
+    <p>table </p>
+    <table>
+          <fieldset>
+            {% if form.non_field_errors %}
+              <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
+            {% endif %}
+            {% for field in form %}
+            <tr{% if field.field.required %} class="required"{% endif %}>
+                <th style="text-align: left"><label for="{{ field.id_for_label }}">{{ field.label }}:</label></th>
+                <td>
+                    <small>{% if field.errors %}
+                      {{ field.errors }}<br/>
+                    {% endif %}</small>
+                    {{field}}
+                {% comment %}
+                <input id="{{ field.id_for_label }}"
+                     name="{{ field.html_name }}"
+                     value="{{ field.value }}"
+                    {% if field.field.max_length != None %}
+                        maxlength="{{ field.field.max_length }}"
+                    {% endif %}
+                    {% if field.field.min_length != None %}
+                        minlength="{{ field.field.min_length }}"
+                    {% endif %}
+                     >
+                    {% if field.help_text %}
+                     <br/><span class="helptext">{{ field.help_text }}</span>
+                     {% endif %}
+                     {% endcomment %}
+            </td>
+        </tr>
+        {% endfor %}
+      </fieldset>
+    </table>
+    <button type="submit">Sign up</button>
+ </form>
+</body>
+</html>
